@@ -1,7 +1,5 @@
 const routes = require("express").Router();
-
-routes
-  .route("/api/catagories")
-  .get((req, res) => res.json("Get request success"));
+const controller = require("../controller/controller");
+routes.route("/api/categories").get(controller.create_Categories);
 
 module.exports = routes;

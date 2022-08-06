@@ -10,10 +10,8 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use(require("./routes/route"));
+
 app.listen(port, () => {
   console.log("listening on port " + port);
-});
-
-app.get("/", (req, res) => {
-  res.send("hello from sever");
 });

@@ -1,1 +1,1 @@
-# mern-rtk-expense-tracker-server
+# This is a full stack (MERN) that tracks expense and savings

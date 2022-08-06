@@ -1,6 +1,6 @@
 const model = require("../models/model");
 
-//@ POST /categories/
+//@ POST /Categories/
 async function create_Categories(req, res) {
   const Create = new model.Categories({
     type: "Investment",
@@ -15,7 +15,7 @@ async function create_Categories(req, res) {
   });
 }
 
-//@ GET /categories/
+//@ GET /Categories/
 async function get_Categories(req, res) {
   let data = await model.Categories.find({});
 
@@ -25,4 +25,24 @@ async function get_Categories(req, res) {
   return res.json(filter);
 }
 
-module.exports = { create_Categories, get_Categories };
+//@ POST /Transaction/
+async function create_Transaction(req, res) {
+  if (!req.body) return res.status(400).json("Post HTTP Data not Provided");
+  let { name, type, amount } = req.body;
+
+  const create = await new model.Transaction({
+    name,
+    type,
+    amount,
+    date: new Date(),
+  });
+
+  create.save(function (err) {
+    if (!err) return res.json(create);
+    return res
+      .status(400)
+      .json({ message: `Error while creating transaction ${err}` });
+  });
+}
+
+module.exports = { create_Categories, get_Categories, create_Transaction };

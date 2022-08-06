@@ -1,12 +1,13 @@
 const model = require("../models/model");
 
-function create_Categories(req, res) {
+//@ POST /categories/
+async function create_Categories(req, res) {
   const Create = new model.Categories({
-    type: "Savings",
-    color: "#1F3B5C",
+    type: "Investment",
+    color: "#FCBE44",
   });
 
-  Create.save(function (err) {
+  await Create.save(function (err) {
     if (!err) return res.json(Create);
     return res
       .status(400)
@@ -14,8 +15,14 @@ function create_Categories(req, res) {
   });
 }
 
-function create_Categories(req, res) {
-  res.json("route");
+//@ GET /categories/
+async function get_Categories(req, res) {
+  let data = await model.Categories.find({});
+
+  let filter = await data.map((v) =>
+    Object.assign({}, { type: v.type, color: v.color })
+  );
+  return res.json(filter);
 }
 
-module.exports = { create_Categories };
+module.exports = { create_Categories, get_Categories };

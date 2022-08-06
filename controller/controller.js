@@ -45,4 +45,16 @@ async function create_Transaction(req, res) {
   });
 }
 
-module.exports = { create_Categories, get_Categories, create_Transaction };
+//  @ GET /Transaction/
+async function get_Transaction(req, res) {
+  let data = await model.Transaction.find({});
+  return res.json(data);
+}
+
+
+module.exports = {
+  create_Categories,
+  get_Categories,
+  create_Transaction,
+  get_Transaction,
+};

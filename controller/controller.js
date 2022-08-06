@@ -51,10 +51,22 @@ async function get_Transaction(req, res) {
   return res.json(data);
 }
 
+//  @ DELETE /Transaction/
+async function delete_Transaction(req, res) {
+  if (!req.body) res.status(400).json({ message: "Request body not Found" });
+  await model.Transaction.deleteOne(req.body, function (err) {
+    if (!err) res.json("Record Deleted...!");
+  })
+    .clone()
+    .catch(function (err) {
+      res.json("Error while deleting Transaction Record");
+    });
+}
 
 module.exports = {
   create_Categories,
   get_Categories,
   create_Transaction,
   get_Transaction,
+  delete_Transaction,
 };
